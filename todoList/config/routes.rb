@@ -20,18 +20,15 @@ Rails.application.routes.draw do
   get 'tasks/destroy'
 
   get 'users' => 'users#index'
-
-  get 'users/show'
-
+  get 'users/:id' => 'users#show', as: :user
   get 'signup' => 'users#new'
+  post 'users' => 'users#create' 
+  get 'users/:id/edit' => 'users#edit', as: :edit_post
+  put 'users/:id' => 'users#update'
+  patch 'users/:id' => 'users#update'
 
-  post 'users' => 'users#create'
 
-  get 'users/edit'
-
-  get 'users/update'
-
-  get 'users/destroy'
+  delete 'users/:id' => 'users#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

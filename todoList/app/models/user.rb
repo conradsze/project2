@@ -21,6 +21,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true 
   validates :login_id, presence: true, uniqueness: {case_sensitive: false}, length: {in: 2..20}
   validates :email, presence: true, uniqueness: {case_sensitive: false}, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
-  validates :password, presence: true, confirmation: true, length: {in: 6..20}
+  validates :password, presence: true, confirmation: true, length: {in: 6..20}, on: :create
 
 end
