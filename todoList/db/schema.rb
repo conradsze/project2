@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423195208) do
+ActiveRecord::Schema.define(version: 20150426010059) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.string   "type"
+    t.string   "event_type"
     t.string   "location"
     t.integer  "day"
     t.integer  "month"
