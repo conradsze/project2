@@ -1,2 +1,27 @@
-<h1>Tasks#show</h1>
-<p>Find me in app/views/tasks/show.html.erb</p>
+
+<div>
+<h1><%=@task.title%> </h1>
+</div>
+
+<div>
+<h3>date</h3>
+ <%=@task.month%>/<%=@task.day%>/<%=@task.year%>
+</div>
+
+<div>
+<h3>location</h3>
+<%=@task.location%> 
+</div>
+
+<div>
+<h3>Who is going?</h3>
+<% @task.users.each do |user|%>
+<%=user.name.titleize%>
+<%end%>
+</div>
+
+<div>
+<h3>body</h3>
+<%=@task.body%> 
+</div>
+
