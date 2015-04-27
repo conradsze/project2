@@ -1,7 +1,6 @@
 class Task < ActiveRecord::Base
 	has_and_belongs_to_many :users
-
-	before_destroy { users.clear }
+	mount_uploader :image, AvatarUploader
 
   validates :title, presence: true 
   validates :body, presence: true 

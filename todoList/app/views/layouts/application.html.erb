@@ -6,26 +6,32 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="bg-info">
     <% if logged_in? %>
     <div class="container">
+    <br>
   <div class="row">
     <div class="col-md-3">
       Logged in as: <%= current_user.name %> | 
+      <div class="col-md-3 box">
+<%= image_tag current_user.image.url ,class: "img-responsive" %>
+</div>
       </div>
-        <div class="col-md-4 col-md-offset-5">
+        <div class="col-md-4 col-md-offset-5" >
       <%= link_to 'Home', user_path(current_user) %> |
       <%= link_to 'Edit Profile', edit_user_path(current_user) %> |
       <%= link_to 'Log Out', logout_path, method: :delete %>
       
       </div>
+      <br>
+      <br>
       </div>
       </div>
 
 
           <div class="col-md-2">
 
-    <ul class="nav nav-pills nav-stacked ">
+    <ul class="nav nav-pills nav-stacked bg-warning ">
       <li><%= link_to 'New Feed', tasks_path %> </li>
       <li><%= link_to 'My todo list', users_path %> </li>
       <li><%= link_to 'My profile', user_path(current_user) %> </li>
@@ -53,7 +59,7 @@
     <% end %>
     <!-- end flash messages -->
 
-    <div class="col-md-offset-2">
+    <div class="col-md-8">
     <%= yield %>
     </div>
 

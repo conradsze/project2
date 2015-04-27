@@ -1,8 +1,14 @@
 <h1>New Feed</h1>
+<%=form_tag(tasks_path,{method:"get"})  do %>
+
+<%= text_field_tag(:q) %>
+<%= submit_tag("Search") %>
+<%end%>
 
 
-<% @tasks.each do |task|%>
-<li>
+<% @tasks.reverse.each do |task|%>
+<ul class="list-group">
+<li class="list-group-item">
 <% task.users.each do |user|%>
 <% if task.users.first == user%>
 
@@ -12,11 +18,12 @@ and
 ,
 <% end %>
 <% if current_user == user%>
-you
+You
 <%else%>
 <%= link_to "#{user.name.titleize}", user_path(user) %>
 <% end %>
 <%end%> <%= (task.users.count == 1) && (current_user != task.users.first)? 'is' : 'are'%> going to <%= link_to "#{task.title.downcase}", task_path(task) %> on <%=task.month%>/<%=task.day%> at <%=task.location%>
  
 </li>
+</ul>
 <%end%>
