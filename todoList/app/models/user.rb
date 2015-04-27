@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	has_and_belongs_to_many :tasks
 
+    mount_uploader :image, AvatarUploader
+
     before_destroy { tasks.clear }
 
 	 attr_reader :password
