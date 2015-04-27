@@ -4,7 +4,19 @@
 <% @tasks.each do |task|%>
 <li>
 <% task.users.each do |user|%>
-<%=user.name%>
-<%end%> <%= "is".pluralize(task.users.count)%> going to <%=task.title%> on <%=task.month%>/<%=task.day%> at <%=task.location%>
+<% if task.users.first == user%>
+
+<% elsif task.users.last == user%>
+and 
+<% else%>
+,
+<% end %>
+<% if current_user == user%>
+you
+<%else%>
+<%= link_to "#{user.name.titleize}", user_path(user) %>
+<% end %>
+<%end%> <%= (task.users.count == 1) && (current_user != task.users.first)? 'is' : 'are'%> going to <%= link_to "#{task.title.downcase}", task_path(task) %> on <%=task.month%>/<%=task.day%> at <%=task.location%>
+ 
 </li>
 <%end%>

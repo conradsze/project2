@@ -1,2 +1,13 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>Hello <%= current_user.name%> </h1>
+<% current_user.tasks.sort_by{|e| -e[:month]}.each do |task|%>
+<div>
+<%= task.title%>
+<% if task.location%>
+at <%=task.location%>
+<%end %>
+on <%=task.month%>/<%=task.day%>/<%=task.year%> 
+
+<a><%= link_to "info", task_path(task)%></a>
+</div>
+<%end%>
+<p><%= link_to "Add event", 'tasks/new' %></p>

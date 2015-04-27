@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'users#index'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
   get 'tasks/:id' => 'tasks#show', as: :task
   put 'tasks/:id' => 'tasks#update'
   patch 'tasks/:id' => 'tasks#update'
+  post 'tasks/:id' => 'tasks#join', as: :join
+  delete 'tasks/:id' => 'tasks#unjoin', as: :unjoin
   get 'tasks/:id/edit' => 'tasks#edit', as: :edit_task
   delete 'tasks/:id' => 'tasks#destroy'
 

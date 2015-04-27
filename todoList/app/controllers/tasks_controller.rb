@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :require_login,
+
   def index
     @tasks = Task.all
   end
@@ -13,13 +15,29 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    current_user.tasks<<@task
-    if @current_user.save
-     redirect_to tasks_path
+    if @task.save
+       current_user.tasks<<@task
+       @current_user.save
+     redirect_to task_path(current_user.tasks.last)
     else
       render :new
     end
   end
+
+  def join
+       @task = Task.find(params[:id]) 
+       current_user.tasks<<@task
+       current_user.save
+     redirect_to task_path(@task)
+  end
+
+    def unjoin
+       @task = Task.find(params[:id]) 
+       current_user.tasks.delete(Task.find(@task))
+       current_user.save
+     redirect_to task_path(@task)
+  end
+
 
   def edit
     @task = Task.find(params[:id]) 
@@ -37,11 +55,18 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-     redirect_to users_path
+     redirect_to user_path(current_user)
   end
 
   private
   def task_params
     params.require(:task).permit(:title, :body, :event_type, :location , :day, :month, :year)
+  end
+
+  def require_login
+    unless logged_in?
+       flash[:error] = "You must be logged in to access thar page!"
+       redirect_to login_path
+     end
   end
 end
