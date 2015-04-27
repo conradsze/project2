@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post 'tasks/:id' => 'tasks#join', as: :join
   delete 'tasks/:id' => 'tasks#unjoin', as: :unjoin
   get 'tasks/:id/edit' => 'tasks#edit', as: :edit_task
-  delete 'tasks/:id' => 'tasks#destroy'
+  delete 'tasks/:id/edit' => 'tasks#destroy',as: :destroy_task
 
   get 'users' => 'users#index'
   get 'signup' => 'users#new'

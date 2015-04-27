@@ -4,6 +4,12 @@ class User < ActiveRecord::Base
     mount_uploader :image, AvatarUploader
 
     before_destroy { tasks.clear }
+   before_save :default_image
+
+  def default_image
+    self.image ||= 'http://blackdog4kids.com/holiday/summer/images/sign-activity.gif'
+  end
+  
 
 	 attr_reader :password
 

@@ -1,8 +1,13 @@
 class TasksController < ApplicationController
-  before_action :require_login,
+  before_action :require_login
+  before_action :authorized?, only: [:edit, :update]
 
   def index
-    @tasks = Task.all
+    if params[:q]
+      @tasks = Task.where('title like ?',"%#{params[:q]}%")
+    else
+      @tasks = Task.all
+    end
   end
 
   def show
@@ -60,7 +65,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :body, :event_type, :location , :day, :month, :year)
+    params.require(:task).permit(:title, :body, :event_type, :location , :day, :month, :year, :image)
   end
 
   def require_login
@@ -69,4 +74,11 @@ class TasksController < ApplicationController
        redirect_to login_path
      end
   end
+
+  def authorized?
+    unless Task.find(params[:id]).users.first == current_user
+      flash[:error] = "You must be logged as #{Task.find(params[:id]).users.first.name} to access thar page!"
+      redirect_to users_path
+    end
+  end  
 end

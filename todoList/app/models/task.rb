@@ -2,8 +2,6 @@ class Task < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	mount_uploader :image, AvatarUploader
 
-	before_destroy { users.clear }
-
   validates :title, presence: true 
   validates :body, presence: true 
   validates :day, presence: true , :inclusion => { :in => 1..31, :message => "must be between 1 and 31" }

@@ -1,6 +1,11 @@
-<h1>Hello <%= current_user.name%> </h1>
-<% current_user.tasks.sort_by{|e| -e[:month]}.each do |task|%>
-<div>
+    <div class="container">
+      <div class="row">
+<h1>Hello <%= current_user.name.titleize%>, You have <%= pluralize(current_user.tasks.count, "task") %> on your list</h1>
+
+<% current_user.tasks.reverse.each do |task|%>
+<ul class="list-group col-md-10 box">
+<li class="list-group-item ">
+<div >
 <%= task.title%>
 <% if task.location%>
 at <%=task.location%>
@@ -9,5 +14,9 @@ on <%=task.month%>/<%=task.day%>/<%=task.year%>
 
 <a><%= link_to "info", task_path(task)%></a>
 </div>
+</li>
+</ul>
 <%end%>
-<p><%= link_to "Add event", 'tasks/new' %></p>
+<div class= "col-md-12 box"><%= link_to "Add event", 'tasks/new', class: "btn btn-primary" %></div>
+</div>
+</div>
