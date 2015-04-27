@@ -16,9 +16,9 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :day, "DD/MM/YYYY" %><br>
-    <%= f.number_field :day , min: 1, max: 31%>
+    <%= f.label :day, "MM/DD/YYYY" %><br>
     <%= f.number_field :month , min: 1, max: 12%>
+    <%= f.number_field :day , min: 1, max: 31%>
     <%= f.number_field :year , min: 2015, max: 9999%>
   </div>
   <div class="field">
@@ -30,7 +30,7 @@
     <%= f.text_area :location %>
   </div>
    <div class="field">
-    <%= f.label :body %><br>
+    <%= f.label :body, "Description" %><br>
     <%= f.text_area :body %>
   </div>
   <div class="actions">

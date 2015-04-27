@@ -1,15 +1,16 @@
 
 <div>
 <h1><%=@task.title%> </h1>
+
 </div>
 
 <div>
-<h3>date</h3>
+<h3>Date</h3>
  <%=@task.month%>/<%=@task.day%>/<%=@task.year%>
 </div>
 
 <div>
-<h3>location</h3>
+<h3>Location</h3>
 <%=@task.location%> 
 </div>
 
@@ -18,10 +19,18 @@
 <% @task.users.each do |user|%>
 <%=user.name.titleize%>
 <%end%>
+<%if !@task.users.include?(current_user) %>
+<%= link_to "join", join_path ,method: :post, class: "btn btn-danger"%>
+<%else%>
+<%= link_to "quit", unjoin_path,method: :delete, class: "btn btn-danger"%>
+
+<% end %>
 </div>
 
 <div>
-<h3>body</h3>
+<h3>Description</h3>
 <%=@task.body%> 
 </div>
-
+<%if @task.users.first==current_user %>
+<%= link_to "edit this event",edit_task_path(@task), class: "btn btn-danger"%>
+<% end %>
